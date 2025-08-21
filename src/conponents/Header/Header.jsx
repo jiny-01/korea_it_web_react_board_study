@@ -33,7 +33,7 @@ function Header() {
           <li css={s.headerIcon} onClick={() => onClickNavHandler("/auth/signin")}>
             <LuLogIn />
           </li>
-          <li css={s.headerIcon} onClick={() => onClickNavHandler("/auth/signin")}>
+          <li css={s.headerIcon} onClick={() => onClickNavHandler("/auth/signup")}>
             <LuUserRoundPlus />
           </li>
         </ul>

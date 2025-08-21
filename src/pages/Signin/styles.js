@@ -2,44 +2,75 @@ import { css } from "@emotion/react"
 
 
 export const container = css`
-width: 100%;
-height:100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 60px 0;
-box-sizing: border-box;
-`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 40px;
+`;
 
 export const box = css`
-width: 400px;
-height: 400px;
-/* background-color: skyblue; */
-border: 1px solid #dbdbdb;
-border-radius: 15px;
-/* background-color: blueviolet; */
-align-items: center;
-padding: 30px;
-`
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+`;
 
-export const inputBox=css`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-/* background-color: aliceblue; */
-border-radius: 15px;
-gap: 10px;
+export const inputBox = css`
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+`;
 
+export const signinBtnBox = css`
+	display: flex;
+	gap: 10px;
 
-& > input {
-    outline: none;
-    border: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
-    border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 16px;
-    color: #333;
-}
-`
+	& > button {
+        
+		flex: 1;
+		padding: 12px 0;
+		border-radius: 8px;
+		font-size: 15px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s ease;
+        background-color: #dee2e6; /* 연회색 */
+        color: black;
+        border: none;
+	}
+
+	& > button:hover {
+		opacity: 0.9;
+	}
+`;
+
+export const oauthBtnBox = css`
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	& > button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px; /* 아이콘-텍스트 간격 */
+		width: 100%;
+		padding: 12px;
+		border: 1px solid #e0e0e0;
+		border-radius: 8px;
+		background-color: #fff;
+		font-size: 14px;
+		font-weight: 500;
+		color: #333;
+		cursor: pointer;
+
+		/* ✅ background → background-color 로 변경 */
+		transition: background-color 0.2s ease, color 0.2s ease;
+
+		&:hover {
+			background-color: #f8f9fa;
+			color: #000;
+		}
+	}
+`;
