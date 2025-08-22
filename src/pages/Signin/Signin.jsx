@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import { SiNaver } from "react-icons/si";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { signinRequest } from "../../apis/auth/authApis";
 
 
 function Signin() {
@@ -28,6 +29,31 @@ function Signin() {
       return;
     } else {
       //로그인 API 요청 보내기
+      //로그인 성공했을 때 accessToken 가져오기
+      signinRequest({
+        //상태에 입력한 username, password 보내는 것
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          alert(response.data.message);
+          //서버 sign in ApiRespDto 에 있는 data 안에 accessToken 가져오기
+          const accessToken = response.data.data;
+          localStorage.setItem("accessToken", accessToken)   //토큰 로컬스토리지에 저장?
+          navigate("/");       //로그인 성공하면 HOME 페이지로 이동
+        } else if(response.data.status === "failed") {  
+          alert(response.data.message);
+          //요청은 성공 but 아이디, 비번 일치하지 않을 때
+          return;
+        }
+      })
+      .catch((error) => {      //요청에러가 아닌 서버에러
+        alert("문제가 발생했습니다.")
+        return;
+      });
+
     }
     
   }

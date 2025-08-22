@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 /** @jsxImportSource @emotion/react */
 import * as s from "./styles";
 import AuthInput from "../../conponents/AuthInput/AuthInput";
+import { signupRequest } from "../../apis/auth/authApis";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -9,6 +11,7 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
+  const navigate = useNavigate();
 
   //회원가입 클릭한 순간
   const signupOnClickHandler = () => {
@@ -33,6 +36,27 @@ function Signup() {
 
     // 여기에 회원가입 API 요청
     console.log("회원가입 요청 보냄");
+    //회원가입 요청 Ap보내기
+    signupRequest({
+      username: username,
+      password: password,
+      email: email,
+    })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success") {
+          alert(response.data.message);
+          navigate("/auth/signin");
+        } else if(response.data.status === "failed") {  
+          alert(response.data.message);
+          //요청은 성공 but 아이디/이메일 중복확인에 걸렸을 때
+          return;
+        }
+      })
+      .catch((error) => {     //요청에러가 아닌 서버에러
+        alert("문제가 발생했습니다. 다시 시도해주세요.")
+        return;
+      });
   };
 
   //비밀번호 정규식 체크 - password, email의 상태가 변경될 때마다 검사
