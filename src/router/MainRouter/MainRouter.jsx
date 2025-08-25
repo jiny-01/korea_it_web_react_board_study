@@ -14,6 +14,7 @@ function MainRouter() {
         <Route path="/board" element={<Board />} />
         <Route path="/write" element={<Write />} />
         <Route path="/auth/*" element={<AuthRouter />} />
+        <Route path="/oauth2/*" element={<AuthRouter />} />
       </Routes>
     </>
   );

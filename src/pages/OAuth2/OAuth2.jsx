@@ -1,16 +1,23 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */
 import * as s from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 function OAuth2() {
   const navigate = useNavigate();
+  const [searchParam] = useSearchParams();  //로그인 시에도 넘겨줘야하므로 searchParma 이용
 
   return (
     <div css={s.container}>
       <div
         css={s.card}
         onClick={() => {
-          navigate("/oauth2/signup");
+          navigate(
+            `/oauth2/signup?provider=${searchParam.get(
+              "provider"
+            )}&providerUserId=${searchParam.get(
+              "providerUserId"
+            )}&email=${searchParam.get("email")}`
+          );
         }}
       >
         <h3>새로 가입하기</h3>

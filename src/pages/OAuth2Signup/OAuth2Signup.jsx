@@ -1,5 +1,4 @@
 import React from 'react'
-import React from "react";
 /** @jsxImportSource @emotion/react */
 function OAuth2Signup() {
   return (
