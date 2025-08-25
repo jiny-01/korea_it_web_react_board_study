@@ -3,7 +3,15 @@ import React from "react";
 import * as s from "./styles";
 import Header from "../Header/Header";
 import { mainContainer } from "./styles";
+import { useQuery } from "@tanstack/react-query";
+import { getPrincipalRequest } from "../../apis/auth/authApis";
 function Layout({ children }) {
+  const { data, isLoading } = useQuery({
+    queryKey: ["getPrincipal"], //다른 컴포넌트에서 getPrincipal 을 가져다 쓸 수 있음
+    queryFn: getPrincipalRequest, //query function
+    refetch: 1, //실패 시 다시 시도할 횟수
+  });
+
   return (
     <div css={s.layout}>
       <Header />
