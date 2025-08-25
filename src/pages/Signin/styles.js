@@ -26,8 +26,8 @@ export const signinBtnBox = css`
 	display: flex;
 	gap: 10px;
 
-	& > button {
-        
+	& > a {
+        box-sizing: border-box;
 		flex: 1;
 		padding: 12px 0;
 		border-radius: 8px;

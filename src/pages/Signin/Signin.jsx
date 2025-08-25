@@ -42,7 +42,9 @@ function Signin() {
           //서버 sign in ApiRespDto 에 있는 data 안에 accessToken 가져오기
           const accessToken = response.data.data;
           localStorage.setItem("accessToken", accessToken)   //토큰 로컬스토리지에 저장?
-          navigate("/");       //로그인 성공하면 HOME 페이지로 이동
+          // navigate("/");       //로그인 성공하면 HOME 페이지로 이동 (컴포넌트 교체)
+          window.location.href= "/"    
+          //컴포넌트만 바꾸는 것이 아닌 새로고침하면서 새 페이지로 
         } else if(response.data.status === "failed") {  
           alert(response.data.message);
           //요청은 성공 but 아이디, 비번 일치하지 않을 때
@@ -76,18 +78,18 @@ function Signin() {
           <button style={{ backgroundColor: "#0d6efd" }} onClick={signinOnClickHandler}>로그인</button>
         </div>
         <div css={s.oauthBtnBox}>
-          <button className="google">
+          <a href="http://localhost:8080/oauth2/authorization/google">
             <FcGoogle size={20} />
             <span>구글로 로그인</span>
-          </button>
-          <button className="naver">
+          </a>
+          <a href="http://localhost:8080/oauth2/authorization/naver">
             <SiNaver size={18} color="#03C75A" />
             <span>네이버로 로그인</span>
-          </button>
-          <button className="kakao">
+          </a>
+          <a href="http://localhost:8080/oauth2/authorization/kakao">
             <RiKakaoTalkFill size={20} color="#FEE500" />
             <span>카카오로 로그인</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>
