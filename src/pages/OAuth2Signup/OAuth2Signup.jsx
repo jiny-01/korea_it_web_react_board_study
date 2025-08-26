@@ -17,7 +17,7 @@ function OAuth2Signup() {
 
 
   const signupOnClickHandler = () => {
-    // 빈 값 체크 - 모든 항목 입력 다되어있는지
+    // 빈 값 체크 - 모든 항목 입력 다 되어있는지
     if (
       username.trim().length === 0 ||
       password.trim().length === 0 ||
@@ -92,7 +92,7 @@ function OAuth2Signup() {
     setEmail(searchParam.get("email"));
   }, [searchParam]);
 
-  
+
   return (
     <div css={s.container}>
       <h1>회원가입</h1>
