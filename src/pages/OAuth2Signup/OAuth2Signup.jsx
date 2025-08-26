@@ -4,6 +4,8 @@ import * as s from "./styles";
 import AuthInput from "../../conponents/AuthInput/AuthInput";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { oauth2SignupRequest } from "../../apis/auth/authApis";
+
+//oauth2 회원가입
 function OAuth2Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +16,6 @@ function OAuth2Signup() {
   const navigate = useNavigate();
 
 
-  
   const signupOnClickHandler = () => {
     // 빈 값 체크 - 모든 항목 입력 다되어있는지
     if (
@@ -38,7 +39,7 @@ function OAuth2Signup() {
     // 여기에 회원가입 API 요청
     console.log("회원가입 요청 보냄");
 
-    //회원가입 요청 Api보내기
+    //회원가입 요청 Api보내기 (oauth2 유저네임 받아오기)
     oauth2SignupRequest({
       username: username,
       password: password,
@@ -85,11 +86,13 @@ function OAuth2Signup() {
     setErrorMessage(newErrorMessage); // 상태 업데이트
   }, [password]);
 
+  //oauth2 로그인했던 이메일 가져오기
   useEffect(() => {
     console.log("렌더링");
     setEmail(searchParam.get("email"));
   }, [searchParam]);
 
+  
   return (
     <div css={s.container}>
       <h1>회원가입</h1>

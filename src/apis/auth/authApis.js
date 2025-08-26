@@ -22,6 +22,7 @@ export const getPrincipalRequest = async () => {
   }  
 };
 
+//회원가입
 export const signupRequest = async (data) => {
   try {
     const response = await instance.post("/auth/signup", data);
@@ -31,6 +32,7 @@ export const signupRequest = async (data) => {
   }
 };
 
+//로그인
 export const signinRequest = async (data) => {
   try {
     const response = await instance.post("/auth/signin", data);
@@ -40,9 +42,20 @@ export const signinRequest = async (data) => {
   }
 };
 
+//oauth 회원가입
 export const oauth2SignupRequest = async (data) => {
   try {
     const response = await instance.post("/oauth2/signup", data)
+    return response;
+  } catch (error) {
+    return error.response
+  }
+}
+
+//oauth 로그인 연동
+export const oauth2MergeRequest = async (data) => {
+  try {
+    const response = await instance.post("/oauth2/merge", data)
     return response;
   } catch (error) {
     return error.response

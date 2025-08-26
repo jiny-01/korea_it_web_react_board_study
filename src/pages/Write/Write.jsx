@@ -1,9 +1,16 @@
-import React from 'react'
+/** @jsxImportSource @emotion/react */
+import * as s from "./styles";
 
 function Write() {
   return (
-    <div>Write</div>
-  )
+    <div css={s.container}>
+      <input type="text" />
+      <textarea name="" id=""></textarea>
+      <div>
+        <button>게시하기</button>
+      </div>
+    </div>
+  );
 }
 
-export default Write
+export default Write;
