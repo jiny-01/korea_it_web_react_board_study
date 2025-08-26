@@ -39,3 +39,12 @@ export const signinRequest = async (data) => {
     return error.response;
   }
 };
+
+export const oauth2SignupRequest = async (data) => {
+  try {
+    const response = await instance.post("/oauth2/signup", data)
+    return response;
+  } catch (error) {
+    return error.response
+  }
+}

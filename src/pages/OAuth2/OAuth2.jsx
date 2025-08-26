@@ -4,7 +4,7 @@ import * as s from "./styles";
 import { useNavigate, useSearchParams } from "react-router-dom";
 function OAuth2() {
   const navigate = useNavigate();
-  const [searchParam] = useSearchParams();  //로그인 시에도 넘겨줘야하므로 searchParma 이용
+  const [searchParam] = useSearchParams(); //로그인 시에도 넘겨줘야하므로 searchParma 이용
 
   return (
     <div css={s.container}>
@@ -12,7 +12,7 @@ function OAuth2() {
         css={s.card}
         onClick={() => {
           navigate(
-            `/oauth2/signup?provider=${searchParam.get(
+            `/auth/oauth2/signup?provider=${searchParam.get(
               "provider"
             )}&providerUserId=${searchParam.get(
               "providerUserId"
