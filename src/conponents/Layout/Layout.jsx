@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import { mainContainer } from "./styles";
 import { useQuery } from "@tanstack/react-query";
 import { getPrincipalRequest } from "../../apis/auth/authApis";
+
 function Layout({ children }) {
   const accessToken = localStorage.getItem("accessToken");
   const { data, isLoading } = useQuery({
