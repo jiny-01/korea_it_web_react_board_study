@@ -21,7 +21,6 @@ export const listContainer = css`
   box-sizing: border-box;
   /* background-color: aliceblue; */
 
-
   & > ul > li {
     justify-content: space-between;
     display: flex;
@@ -35,9 +34,37 @@ export const listContainer = css`
     color: #333;
   }
 
-
   & > div {
     display: flex;
     gap: 20px;
+  }
+`;
+
+export const paginateContainer = css`
+  width: 100%;
+  padding: 30px 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > ul {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    color: #333;
+    cursor: pointer;
+  }
+
+  & > li {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #333;
+    padding: 8px;
+    box-sizing: border-box;
+
+    & > li:hover {
+      transform: translateY(-2px);
+    }
   }
 `;
