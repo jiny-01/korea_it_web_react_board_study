@@ -5,15 +5,21 @@ import Write from "../../pages/Write/write";
 import Board from "../../pages/Board/Board";
 import AuthRouter from "../AuthRouter/AuthRouter";
 import ProtectedRoute from "../../conponents/ProtectedRoute/ProtectedRoute";
+import BoardDetail from "../../pages/BoardDetail/BoardDetail";
 
 function MainRouter() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/board" element={<ProtectedRoute>
+        <Route
+          path="/board"
+          element={
+            <ProtectedRoute>
               <Board />
-            </ProtectedRoute>} />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/write"
           element={
@@ -23,6 +29,15 @@ function MainRouter() {
           }
         />
         <Route path="/auth/*" element={<AuthRouter />} />
+        
+        <Route
+          path="/board/:boardId"
+          element={
+            <ProtectedRoute>
+              <BoardDetail />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

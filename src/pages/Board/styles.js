@@ -68,3 +68,13 @@ export const paginateContainer = css`
     }
   }
 `;
+
+export const eachBoard = css`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  span {
+    margin-right: 8px;
+  }
+`;

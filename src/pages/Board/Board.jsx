@@ -4,7 +4,9 @@ import React, { useEffect, useState } from "react";
 import * as s from "./styles";
 import { getBoardList } from "../../apis/board/boardApis";
 import ReactPaginate from "react-paginate";
+import { useNavigate } from "react-router-dom";
 function Board() {
+  const navigate = useNavigate();
   const [boardList, setBoardList] = useState([]);
   const [message, setMessage] = useState("");
   const [currentBoardList, setCurrentBoardList] = useState([]);
@@ -49,9 +51,14 @@ function Board() {
               const boardNumber = currentPage * amountBoard + index + 1;
               const formattedDate = date.split("T")[0];
               return (
-                <li key={board.boardId}>
-                  <div>
-                    <span>{boardNumber}</span>
+                <li
+                  key={board.boardId}
+                  onClick={() => {
+                    navigate(`/board/${board.boardId}`);
+                  }}
+                >
+                  <div css={s.eachBoard}>
+                    <span>{boardNumber}.</span>
                     <strong>{board.title}</strong>
                   </div>
                   <span>{formattedDate}</span>
@@ -67,6 +74,7 @@ function Board() {
           onPageChange={pageOnChangeHandler}
           previousLabel="◁ 이전"
           nextLabel="다음 ▷"
+          
         />
       </div>
     </div>
