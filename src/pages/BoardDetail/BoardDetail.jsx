@@ -4,10 +4,9 @@ import * as s from "./styles";
 import { useNavigate, useParams } from "react-router-dom";
 
 import {
-  deleteBoard,
-  getBoardDetail,
   removeBoard,
-  updateBoard,
+  getBoardDetail,
+  
 } from "../../apis/board/boardApis";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -96,7 +95,7 @@ function BoardDetail() {
         boardData?.userId &&
         principalData.data.data.userId === boardData.userId ? (
           <div>
-            <button css={s.btn("#dc3545")} onClick={removeHandler}>
+            <button css={s.btn("#dc3545")} onClick={() => {removeHandler(boardId)}}>
               삭제
             </button>
             <button css={s.btn("#0d6efd")}>수정</button>
