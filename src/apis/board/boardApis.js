@@ -53,15 +53,13 @@ export const removeBoard = async (boardId) => {
   }
 };
 
-export const updateBoard = async () => {
+export const updateBoardRequest = async (data) => {
   try {
-    const response = await instance.post(`/board/update/${boardId}`, {
-      boardId: response.boardId,
-      title: response.title,
-      content: response.content,
-    });
+    const response = await instance.post("/board/update", data);
     return response;
   } catch (error) {
     return error.response;
   }
 };
+
+

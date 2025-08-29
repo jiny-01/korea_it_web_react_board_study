@@ -3,11 +3,7 @@ import { useEffect, useState } from "react";
 import * as s from "./styles";
 import { useNavigate, useParams } from "react-router-dom";
 
-import {
-  removeBoard,
-  getBoardDetail,
-  
-} from "../../apis/board/boardApis";
+import { removeBoard, getBoardDetail } from "../../apis/board/boardApis";
 import { useQueryClient } from "@tanstack/react-query";
 
 function BoardDetail() {
@@ -58,24 +54,9 @@ function BoardDetail() {
   };
 
   //게시물 수정 기능
-  // const updateHandler = () => {
-  //   if (!boardData) return;
-
-  //   const newBoard = {
-  //     boardId: boardData.boardId,
-  //     title: boardData.title,
-  //     content: boardData.content,
-  //   }
-
-  //   updateBoard(boardData.boardId).then((response) => {
-  //     if (response.data.status === "success") {
-  //       alert(response.data.message);
-  //       setUpdateBoard();
-  //     } else {
-  //       alert(response.data.message);
-  //     }
-  //   });
-  // };
+  const updateHandler = () => {
+    navigate(`/board/update/${boardData.boardId}`);
+  };
 
   return (
     <div css={s.container}>
@@ -95,10 +76,20 @@ function BoardDetail() {
         boardData?.userId &&
         principalData.data.data.userId === boardData.userId ? (
           <div>
-            <button css={s.btn("#dc3545")} onClick={() => {removeHandler(boardId)}}>
+            <button
+              css={s.btn("#dc3545")}
+              onClick={() => {
+                removeHandler(boardId);
+              }}
+            >
               삭제
             </button>
-            <button css={s.btn("#0d6efd")}>수정</button>
+            <button
+							css={s.btn("#0d6efd")}
+							onClick={() => navigate(`/board/update/${boardId}`)}
+						>
+							수정
+						</button>
           </div>
         ) : (
           <></>
