@@ -1,7 +1,7 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */
 import * as s from "./styles";
-import profileImg from "../../assets/profileimage.png";
+import profileImg from "../../assets/profileimage.jpg";
 
 
 function Profile() {
