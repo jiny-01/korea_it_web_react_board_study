@@ -4,11 +4,9 @@ export const container = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
   padding: 40px 200px;
   box-sizing: border-box;
-  /* background-color: aliceblue; */
 `;
 
 export const profileContainer = css`
@@ -16,33 +14,24 @@ export const profileContainer = css`
   min-height: 700px;
   display: flex;
   flex-direction: column;
-  /* background-color: skyblue; */
 `;
 
 export const profileHeader = css`
   width: 100%;
   height: 200px;
   display: flex;
-  background-color: yellowgreen;
-`;
-
-export const profileMain = css`
-  width: 100%;
-  height: 500px;
-  background-color: salmon;
 `;
 
 export const profileImgBox = css`
-  width: 200px;
+  width: 250px;
   height: 100%;
-  background-color: cadetblue;
   display: flex;
   justify-content: center;
   align-items: center;
 
   & > div {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: 1px solid #dbdbdb;
     overflow: hidden;
@@ -57,9 +46,8 @@ export const profileImgBox = css`
 `;
 
 export const profileInfoBox = css`
-  width: calc(100% - 200px);
+  width: calc(100% - 250px);
   height: 100%;
-  background-color: burlywood;
   padding: 30px 40px;
   box-sizing: border-box;
   color: #333;
@@ -70,6 +58,7 @@ export const profileInfoBox = css`
 
   & > div {
     display: flex;
+    align-items: center;
     gap: 15px;
 
     & > p {
@@ -79,12 +68,59 @@ export const profileInfoBox = css`
     & > button {
       border: none;
       padding: 3px 5px;
-      border-radius: 4px;
       font-size: 11px;
-      font-weight: 620;
-      background-color: #0d63fd;
+      font-weight: 600;
+      border-radius: 4px;
+      background-color: #0d6efd;
       color: white;
       cursor: pointer;
     }
   }
 `;
+
+export const profileBox = css`
+  width: 100%;
+  height: 500px;
+  border: 1px solid #dbdbdb;
+  box-sizing: border-box;
+`;
+
+export const profileTab = (tabChild) => css`
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #dbdbdb;
+  box-sizing: border-box;
+
+  & > ul {
+    display: flex;
+
+    & > li {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      padding: 0 14px;
+      border-right: 1px solid #dbdbdb;
+      box-sizing: border-box;
+      color: #333;
+      cursor: pointer;
+
+      &:nth-child(${tabChild}) {
+        border-bottom: 1px solid #white;
+      }
+
+      &:hover {
+        background-color: #f2f2f2;
+        font-weight: 600;
+      }
+    }
+  }
+`;
+
+export const profileMain = css`
+  width: 100%;
+  height: 460px;
+`;
+
+
