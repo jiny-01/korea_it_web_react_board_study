@@ -20,8 +20,9 @@ function Layout({ children }) {
   //usePrincipalState 에서 정의한 상태 변경
   useEffect(() => {
     // console.log(data);    //data 없을 때 undefined
+    // console.log(isLoggedIn, principal);
     if (data?.data.status === "success") {
-      login(data?.data.data);      //data 가 있으면 data.data 를 넘겨줌
+      login(data?.data.data); //data 가 있으면 data.data 를 넘겨줌
     }
   }, [data, login]);
 

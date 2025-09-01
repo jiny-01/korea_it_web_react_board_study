@@ -4,14 +4,19 @@ import * as s from "./styles";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { addBoardRequest } from "../../apis/board/boardApis";
+import { usePrincipalState } from "../../store/usePrincipalStore";
 
 function Write() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const queryClient = useQueryClient();
-  const principalData = queryClient.getQueryData(["getPrincipal"]);
+
+  // const queryClient = useQueryClient();
+  // const principalData = queryClient.getQueryData(["getPrincipal"]);
   //로그인되어있는지 확인, userId 필요하기 때문 - queryClient, principalData 가져옴
+
+  //대신 zustand 이용
+  const {isLoggedIn, principal} = usePrincipalState();
 
   const addBoardMutation = useMutation({
     mutationKey: "addBoard",
@@ -38,9 +43,9 @@ function Write() {
       return;
     }
 
-    console.log(principalData.data.data.userId);
+    console.log(principal.userId);
 
-    if (principalData === undefined) {
+    if (!isLoggedIn) {
       alert("로그인이 필요합니다.");
       navigate("/auth/signin");
       return;
@@ -57,7 +62,7 @@ function Write() {
     addBoardMutation.mutate({
       title: title,
       content: content,
-      userId: principalData.data.data.userId,
+      userId: principal.userId,
     });
   };
   return (

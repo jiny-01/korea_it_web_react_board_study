@@ -3,6 +3,7 @@ import * as s from "./styles";
 import React from 'react'
 
 function MyBoard() {
+  
   return (
     <div css={s.container}>
       <ul>

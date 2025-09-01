@@ -4,7 +4,8 @@ import * as s from "./styles";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { removeBoard, getBoardDetail } from "../../apis/board/boardApis";
-import { useQueryClient } from "@tanstack/react-query";
+// import { useQueryClient } from "@tanstack/react-query";
+import { usePrincipalState } from "../../store/usePrincipalStore";
 
 function BoardDetail() {
   const navigate = useNavigate();
@@ -15,8 +16,11 @@ function BoardDetail() {
   //     title: boardData.title,
   //     content: boardData.content,
   // });
-  const queryClient = useQueryClient();
-  const principalData = queryClient.getQueryData(["getPrincipal"]);
+  // const queryClient = useQueryClient();
+  // const principalData = queryClient.getQueryData(["getPrincipal"]);
+  //대신 zustand 이용
+  const {isLoggedIn, principal} = usePrincipalState();
+
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
@@ -72,9 +76,9 @@ function BoardDetail() {
         <button css={s.btn("#6c757d")} onClick={backOnClickHandler}>
           목록
         </button>
-        {principalData?.data?.data?.userId &&
+        {principal.userId &&
         boardData?.userId &&
-        principalData.data.data.userId === boardData.userId ? (
+        principal.userId === boardData.userId ? (
           <div>
             <button
               css={s.btn("#dc3545")}

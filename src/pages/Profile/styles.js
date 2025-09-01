@@ -106,8 +106,8 @@ export const profileTab = (tabChild) => css`
       color: #333;
       cursor: pointer;
 
-      &:nth-child(${tabChild}) {
-        border-bottom: 1px solid #white;
+      &:nth-of-type(${tabChild}) {
+        border-bottom: 1px solid beige;
       }
 
       &:hover {
@@ -122,5 +122,3 @@ export const profileMain = css`
   width: 100%;
   height: 460px;
 `;
-
-

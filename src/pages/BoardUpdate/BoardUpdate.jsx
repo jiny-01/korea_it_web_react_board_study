@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import * as s from "./styles";
 import { getBoardDetail, updateBoardRequest } from "../../apis/board/boardApis";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { usePrincipalState } from "../../store/usePrincipalStore";
 
 //게시판 수정 페이지
 function BoardUpdate() {
@@ -14,8 +15,9 @@ function BoardUpdate() {
   });
   const { boardId } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const principalData = queryClient.getQueryData(["getPrincipal"]);
+  // const queryClient = useQueryClient();
+  // const principalData = queryClient.getQueryData(["getPrincipal"]);
+  const {isLoggedIn, principal} = usePrincipalState();
 
   // 게시글 수정 요청 (useMutation)
   const updateBoardMutation = useMutation({
@@ -56,7 +58,7 @@ function BoardUpdate() {
 		getBoardDetail(boardId).then((response) => {
 			if (response.data.status === "success") {
 				if (
-					principalData.data.data.userId !== response.data.data.userId
+				 principal.userId !== response.data.data.userId
 				) {
 					alert("잘못된 접근입니다.");
 					navigate("/board");
@@ -67,7 +69,7 @@ function BoardUpdate() {
 				navigate("/board");
 			}
 		});
-	}, [boardId, principalData, navigate]);
+	}, [boardId, principal, navigate]);
 
   //1. 수정 전 일단 단건조회로 원래 데이터를 가져옴
   // 이때 detatil 에서 boardId 가지고 있으므로 파라미터로 넘겨줌

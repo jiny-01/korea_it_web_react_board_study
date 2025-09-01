@@ -5,7 +5,8 @@ import { create } from "zustand";
 //로그인 함수 : userData 를 가져와서 principal 에 userData 로 셋하는 함수
 //로그아웃 함수: 토큰 제거해서 상태 변경 - 로그인(안됨), principal(없음)
 
-  
+
+//get 은 사용할 때 가져와서 쓰기 위함
 export const usePrincipalState = create((set, get) => ({
   isLoggedIn: false,
   principal: null,

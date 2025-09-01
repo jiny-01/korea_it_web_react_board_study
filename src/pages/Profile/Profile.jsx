@@ -5,6 +5,7 @@ import profileImg from "../../assets/profileimage.jpg";
 import MyBoard from "../../conponents/MyBoard/MyBoard";
 import ChangePassword from "../../conponents/ChangePassword/ChangePassword";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { usePrincipalState } from "../../store/usePrincipalStore";
 
 function Profile() {
   const [tab, setTab] = useState("myboard");
@@ -12,6 +13,7 @@ function Profile() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
+  const {isLoggedIn, principal} = usePrincipalState();
 
   const tabClickHandler = (path) => {
     setTabChild(path === "myboard" ? 1 : 2);
@@ -33,10 +35,10 @@ function Profile() {
             </div>
           </div>
           <div css={s.profileInfoBox}>
-            <h3>username</h3>
+            <h3>{principal?.username}</h3>
             <div>
-              <p>email@naver.com</p>
-              <button>인증하기</button>
+              <p>{principal?.email}</p>
+              {principal?.authorities[0].authority === "ROLE_TEMPORARY" ? (<button>인증하기</button>): (<></>)}
             </div>
           </div>
         </div>

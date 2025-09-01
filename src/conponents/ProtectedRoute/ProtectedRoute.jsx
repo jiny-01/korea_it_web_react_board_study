@@ -1,12 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { usePrincipalState } from "../../store/usePrincipalStore";
 
 function ProtectedRoute({ children }) {
     //children => write 컴포넌트
   
   const queryClient = useQueryClient();
   const principalData = queryClient.getQueryData(["getPrincipal"]);
+
+  // const {isLoggedIn, principal} = usePrincipalState();
 
   if (principalData === undefined) {
     alert("로그인이 필요합니다.");
