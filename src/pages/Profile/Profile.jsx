@@ -25,8 +25,10 @@ function Profile() {
     setTab(searchParams.get("tab"));
   }, [pathname, searchParams]);
 
+  
+
   return (
-    <div css={s.container}>
+    <div css={s.container}> 
       <div css={s.profileContainer}>
         <div css={s.profileHeader}>
           <div css={s.profileImgBox}>
