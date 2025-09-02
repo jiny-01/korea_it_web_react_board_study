@@ -67,7 +67,7 @@ export const profileInfoBox = css`
 
     & > button {
       border: none;
-      padding: 3px 5px;
+      padding: 6px 12px;
       font-size: 11px;
       font-weight: 600;
       border-radius: 4px;
@@ -83,7 +83,14 @@ export const profileBox = css`
   height: 500px;
   border: 1px solid #dbdbdb;
   box-sizing: border-box;
+
+  /* & > button {
+    text-align: column;
+    flex-direction: column;
+  } */
 `;
+
+
 
 export const profileTab = (tabChild) => css`
   width: 100%;

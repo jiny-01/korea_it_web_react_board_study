@@ -54,6 +54,11 @@ export const paginateContainer = css`
     justify-content: space-between;
     color: #333;
     cursor: pointer;
+    
+    &:hover {
+      opacity: 0.8;
+      background-color: #f2f2f2;
+    }
   }
 
   & > li {

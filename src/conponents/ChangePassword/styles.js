@@ -12,6 +12,7 @@ export const inputBox = css`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 60%;
 
   & > button {
     border: none;
@@ -24,7 +25,18 @@ export const inputBox = css`
 
     &:hover {
       opacity: 0.8;
-      opacity
+    }
+  }
+
+  & > ul {
+    width: 100%;
+    padding-left: 20px;
+    box-sizing: border-box;
+
+    & > li {
+      list-style: disc;
+      font-size: 13px;
+      color: #dc3545;
     }
   }
 `;
