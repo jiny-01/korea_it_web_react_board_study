@@ -24,8 +24,12 @@ function Profile() {
     console.log(tab);
   };
 
-  console.log("profileImg:", principal.profileImg);
   
+  // 이미지 불러올 때 principal이 없을 경우 안전하게 처리
+  if (!principal) {
+    return <div>로딩 중입니다...</div>;
+  }
+
 
   //이메일 인증 로직
   const onClickVerifyHandler = () => {
@@ -46,7 +50,9 @@ function Profile() {
     setTabChild(
       searchParams.get("tab") === "myboard" || searchParams.get("tab") === null
         ? 1
-        : searchParams.get("tab") === "changepassword" ? 2 : 3
+        : searchParams.get("tab") === "changepassword"
+        ? 2
+        : 3
     );
     //myboard 에 있거나 최초 진입 시 1, 아니면 2
   }, [pathname, searchParams]);
@@ -87,7 +93,11 @@ function Profile() {
           <div css={s.profileMain}>
             {tab === "myboard" || tab === null ? (
               <MyBoard userId={principal?.userId} />
-            ) : tab === "changepassword" ? (<ChangePassword />) : (<ChangeProfileImg oldProfileImg={principal.profileImg} />)}
+            ) : tab === "changepassword" ? (
+              <ChangePassword />
+            ) : (
+              <ChangeProfileImg oldProfileImg={principal?.profileImg} />
+            )}
             {/* <MyBoard /> */}
             {/* <ChangePassword /> */}
           </div>
