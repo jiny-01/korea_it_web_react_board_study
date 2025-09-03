@@ -7,6 +7,7 @@ import ChangePassword from "../../conponents/ChangePassword/ChangePassword";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { usePrincipalState } from "../../store/usePrincipalStore";
 import { sendMailRequest } from "../../apis/account/accountApis";
+import ChangeProfileImg from "../../conponents/ChangeProfileImg/ChangeProfileImg";
 
 function Profile() {
   const [tab, setTab] = useState("myboard");
@@ -18,10 +19,13 @@ function Profile() {
 
   //내 게시물 / 비번 변경 탭 변경 로직
   const tabClickHandler = (path) => {
-    setTabChild(path === "myboard" ? 1 : 2);
+    setTabChild(path === "myboard" ? 1 : path === "changepassword" ? 2 : 3);
     navigate(`${pathname}?tab=${path}`);
     console.log(tab);
   };
+
+  console.log("profileImg:", principal.profileImg);
+  
 
   //이메일 인증 로직
   const onClickVerifyHandler = () => {
@@ -42,7 +46,7 @@ function Profile() {
     setTabChild(
       searchParams.get("tab") === "myboard" || searchParams.get("tab") === null
         ? 1
-        : 2
+        : searchParams.get("tab") === "changepassword" ? 2 : 3
     );
     //myboard 에 있거나 최초 진입 시 1, 아니면 2
   }, [pathname, searchParams]);
@@ -53,7 +57,7 @@ function Profile() {
         <div css={s.profileHeader}>
           <div css={s.profileImgBox}>
             <div>
-              <img src={profileImg} alt="profileImage" />
+              <img src={principal?.profileImg} alt="profileImage" />
             </div>
           </div>
           <div css={s.profileInfoBox}>
@@ -75,14 +79,15 @@ function Profile() {
               <li onClick={() => tabClickHandler("changepassword")}>
                 비밀번호 변경
               </li>
+              <li onClick={() => tabClickHandler("changeProfileimg")}>
+                프로필 이미지 변경
+              </li>
             </ul>
           </div>
           <div css={s.profileMain}>
             {tab === "myboard" || tab === null ? (
               <MyBoard userId={principal?.userId} />
-            ) : (
-              <ChangePassword />
-            )}
+            ) : tab === "changepassword" ? (<ChangePassword />) : (<ChangeProfileImg oldProfileImg={principal.profileImg} />)}
             {/* <MyBoard /> */}
             {/* <ChangePassword /> */}
           </div>
