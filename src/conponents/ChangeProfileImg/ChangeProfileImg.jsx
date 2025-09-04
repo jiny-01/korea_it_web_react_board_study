@@ -12,7 +12,7 @@ import { v4 as uuid } from "uuid";
 import { changeProfileImg } from "../../apis/account/accountApis";
 
 function ChangeProfileImg({ oldProfileImg, userId }) {
-  const [profileImg, setProfileImg] = useState("");
+  const [profileImg, setProfileImg] = useState(null);
   const [newProfileImg, setNewProfileImg] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   //파이어베이스 사진 업로드 퍼센트
@@ -117,7 +117,7 @@ function ChangeProfileImg({ oldProfileImg, userId }) {
   return (
     <div css={s.container}>
       <div css={s.profileImgBox}>
-        <img src={profileImg} alt="" onClick={onClickProfileImgHandler} />
+        <img src={profileImg} alt="profileImage" onClick={onClickProfileImgHandler} />
         <input
           type="file"
           accept="image/*"

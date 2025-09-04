@@ -13,7 +13,7 @@ function MyBoard({ userId }) {
     // 마운트 시 최초 요청 한번만
     getBoardList().then((response) => {
       // console.log(response);
-      console.log(response.data.data);
+      // console.log(response.data.data);
       if (response.data.status === "success") {
         setBoardList(
           response.data.data.filter((board) => board.userId === userId)
