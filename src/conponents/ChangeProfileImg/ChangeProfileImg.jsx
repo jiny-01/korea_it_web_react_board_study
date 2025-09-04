@@ -2,10 +2,16 @@
 import { useEffect, useRef, useState } from "react";
 import * as s from "./styles";
 import { storage } from "../../apis/config/firebaseConfig";
-import { ref, uploadBytes, uploadBytesResumable } from "@firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "@firebase/storage";
 import { v4 as uuid } from "uuid";
+import { changeProfileImg } from "../../apis/account/accountApis";
 
-function ChangeProfileImg({ oldProfileImg }) {
+function ChangeProfileImg({ oldProfileImg, userId }) {
   const [profileImg, setProfileImg] = useState("");
   const [newProfileImg, setNewProfileImg] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -65,9 +71,44 @@ function ChangeProfileImg({ oldProfileImg }) {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         ); //퍼센트로 환산  => 로딩바 라이브러리 사용하면 ui 만들 수 있음
         setProgress(progressPercent);
+      },
+
+      //에러 핸들러
+      (error) => {
+        console.log(error);
+        alert("업로드 중 에러가 발생했습니다.");
+        setIsUploading(false);
+      },
+
+      //완료 핸들러
+      async () => {
+        try {
+          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+          // console.log("url:", downloadUrl);
+
+          //요청 함수 호출(accountApi 에 정의)
+          changeProfileImg({ userId: userId, profileImg: downloadUrl }).then(
+            (response) => {
+              if (response.data.status === "success") {
+                alert(response.data.message);
+                window.location.reload();
+              } else if (response.data.status === "failed") {
+                alert(response.data.message);
+              }
+            }
+          );
+        } catch (error) {
+          console.log(error);
+          alert("이미지 URL 을 가져오는 중에 에러가 발생했습니다.");
+        } finally {
+          setIsUploading(false); //성공하든말든 setIsUploading 상태를 false 로
+          setProgress(0);         //업로드 진행 퍼센트 0 초기화
+        }
       }
     );
   };
+
+  //====================== 에러 / 완료 핸들러 하기 =================================
 
   useEffect(() => {
     setProfileImg(oldProfileImg); //이전에 쓰던 거 넣어둠
@@ -86,7 +127,9 @@ function ChangeProfileImg({ oldProfileImg }) {
       </div>
 
       <div css={s.buttonBox}>
-        <button onClick={onClickChangeBtnHandler}>변경하기</button>
+        <button onClick={onClickChangeBtnHandler}>
+          {isUploading ? `{${progress}%}` : "변경하기"}
+        </button>
       </div>
     </div>
   );

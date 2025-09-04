@@ -19,3 +19,13 @@ export const sendMailRequest = async (data) => {
     return error.response;
   }
 };
+
+//프로필 이미지 - 파이어베이스 연결
+export const changeProfileImg = async (data) => {
+  try {
+    const response = await instance.post("account/change/profileImg", data);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
